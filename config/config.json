@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "naren",
-    "password": "password",
-    "database": "rbac",
+    "username": "userx",
+    "password": "pass",
+    "database": "learning0103",
     "host": "localhost",
     "dialect": "mysql"
   },
