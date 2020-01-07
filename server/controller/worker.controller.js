@@ -26,7 +26,10 @@ module.exports = {
     },
     // Finding all workers data order by salary 1000;
     findAll(req, res) {
-        workerModel.findAll({ where: { salary: 1000 } }).then(workers => {
+        workerModel.findAll({
+            where: { salary: 1000 },
+            order: [['name', 'ASC']]
+        }).then(workers => {
             if (workers)
                 res.send(workers);
             else
@@ -34,7 +37,21 @@ module.exports = {
         })
             .catch(error => { console.log(error) })
     },
-}
-    
-   
 
+    // Select salary,name from worker group by salary
+    // findAll(req, res) {
+    //     workerModel.findAll({
+    //         group: ['salary'],
+    //         attributes: ['salary', 'name']
+    //     }).then((workers) => {
+    //         if (workers)
+    //             res.send(workers);
+    //         else
+    //             res.send('No data');
+    //     })
+    //         .catch(error => { console.log(error) })
+    // }
+}
+
+     
+ 

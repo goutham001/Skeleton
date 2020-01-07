@@ -10,12 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     day: DataTypes.INTEGER,
     salary: DataTypes.INTEGER
-  }, {
-    freezeTableName: true,
+  }, {freezeTableName: true,
     timestamps: false,
-    tableName: 'worker'
-  });
-  worker.associate = function (models) {
+    tableName: 'worker'});
+  worker.associate = function(models) {
     // associations can be defined here
   };
   return worker;
