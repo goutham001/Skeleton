@@ -20,4 +20,5 @@ module.exports = (app) => {
     app.post('/worker/create_many', workerController.createmany);
     app.post('/worker/find_one', workerController.findOne);
     app.get('/worker/find_all', workerController.findAll);
+    app.get('/worker/find_all_by_group',workerController.findAllGroupBy);
 }
