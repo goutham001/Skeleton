@@ -1,4 +1,5 @@
 const workerModel = require('../../models').worker;
+const config = require('../../models/index');
 module.exports = {
     createmany(req, res) {
         var workers = req.body;
@@ -9,7 +10,6 @@ module.exports = {
                 res.send("no data to insert")
         })
             .catch(error => { console.log(error) })
-
     },
     // Finding one worker sort by name given by end user;
     findOne(req, res) {
@@ -39,19 +39,33 @@ module.exports = {
     },
 
     // Select salary,name from worker group by salary
-    // findAll(req, res) {
-    //     workerModel.findAll({
-    //         group: ['salary'],
-    //         attributes: ['salary', 'name']
-    //     }).then((workers) => {
-    //         if (workers)
-    //             res.send(workers);
-    //         else
-    //             res.send('No data');
-    //     })
-    //         .catch(error => { console.log(error) })
-    // }
+    findAllGroupBy(req, res) {
+        /*
+        workerModel.findAll({
+            group: ['name'],
+            attributes: ['salary', 'name']
+        }).then((workers) => {
+            if (workers)
+                res.send(workers);
+            else
+                res.send('No data');
+        })
+            .catch(error => { console.log(error) }) 
+            */
+
+        config.sequelize.query('SELECT '
+            + 'name, '
+            + 'SUM(salary) as totalSalary '
+            + 'FROM '
+            + 'worker '
+            + 'GROUP BY '
+            + 'name', { type: config.sequelize.QueryTypes.SELECT })
+            .then(result => {
+                res.send(result);
+                console.log(result);
+            })
+    }
 }
 
-     
- 
+
+
